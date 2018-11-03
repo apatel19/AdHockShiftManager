@@ -1,7 +1,11 @@
 $(document).ready(function(){
     $("#btnSaveEmployeeDetails").click('input', function(){
-        
-       addEmployee();
+
+        var email_address = $('#employee_email_address').val();
+        console.log(email_address);
+        var employee_password = $('#employee_password').val();
+        createUser(email_address, employee_password);
+        setTimeout(addEmployeeToDatabase, 2500);
        
     });
 
@@ -19,10 +23,13 @@ $(document).ready(function(){
      $("#btnSaveManagerDetails").click('input', function(){
         console.log("Button was clicked!");
 
-        authManager();
-        addRepo();
+        //authManager();
+       
+        var manager_email = $('#manager_email_address').val(); 
+        var manager_pass = $("#manager_password").val(); 
+        createUser(manager_email, manager_pass);
+        callAPItoGetLongLatFromAddress();
         //setTimeout(addRepo,4000);
-
         setTimeout(addManagerToDatabase,2500);
 
        
@@ -40,11 +47,10 @@ var lat, long;
 var auth = firebase.auth();
 
 function addManagerToDatabase (){
-
     var uid = auth.currentUser.uid;
     console.log(uid);
     var firebaseRef = firebase.database().ref().child('Manager').child(uid);
-    var firebaseRef_WhoThis = firebase.database().ref().child("Who's_This?");
+    var firebaseRef_position = firebase.database().ref().child("position");
 
     var manager_name = $("#manager_name").val();
     var manager_email = $('#manager_email_address').val(); 
@@ -69,25 +75,30 @@ function addManagerToDatabase (){
     firebaseRef.child("Lat").set(lat);
     firebaseRef.child("Long").set(long); 
     firebaseRef.child("ID").set(uid);
-
     
     manager_email = manager_email.replace('.',"");
     console.log(manager_email);
-    firebaseRef_WhoThis.child(manager_email).set("Manager");
+    firebaseRef_position.child(manager_email).set("Manager");
     
 
 }
 
-function authManager () {
-    var manager_pass = $("#manager_password").val();
-    var manager_email = $('#manager_email_address').val();
+// function authManager () {
+//     var manager_pass = $("#manager_password").val();
+//     var manager_email = $('#manager_email_address').val();
    
-    auth.createUserWithEmailAndPassword(manager_email, manager_pass);
+//     auth.createUserWithEmailAndPassword(manager_email, manager_pass);
     
+// }
+
+function createUser (email, password) {
+    auth.createUserWithEmailAndPassword(email,password);
+    console.log("Created User Successfully");
 }
 
 
-function addRepo() {
+
+function callAPItoGetLongLatFromAddress() {
     var street = $("#street_address").val();
     street = street.split(' ').join('');
     $.ajax({
@@ -114,16 +125,29 @@ function addRepo() {
 //http://dev.virtualearth.net/REST/v1/Locations?CountryRegion=US&adminDistrict=AL&locality=Somewhere&postalCode=35401&addressLine=900%Hargrove%Road&key=At1MPmDJGjOFF6WZ8rwDyhTn-ZHwl7MAQaeMuIunNCcdk6bYznOGuILjZ2ts5YVp
 
 
-function addEmployee()
-{
+function addEmployeeToDatabase() {
+
+    var uid = auth.currentUser.uid;
+    console.log(uid);
+    var firebaseRef = firebase.database().ref().child('Employee').child(uid);
+    var firebaseRef_position = firebase.database().ref().child("position");
+    
+
 
     var employee_name = $('#employee_name').val();
-        var phone_number = $('#phone_number').val();
-        var email_address = $('#email_address').val();
-        var social_security_number = $('#social_security_number').val();
-    var random = "employee";
-    firebaseRef.child(random).child("employee_name").set(employee_name);
-    firebaseRef.child(random).child("phone_number").set(phone_number);
-    firebaseRef.child(random).child("email_address").set(email_address);
-    firebaseRef.child(random).child("social_security_number").set(social_security_number);
+    var phone_number = $('#employee_phone_number').val();
+    var email_address = $('#employee_email_address').val();
+    //var employee_password = $('#employee_password').val();
+    var social_security_number = $('#employee_social_security_number').val();
+    
+    firebaseRef.child("Name").set(employee_name);
+    firebaseRef.child("Phone").set(phone_number);
+    firebaseRef.child("Email").set(email_address);
+    firebaseRef.child("SSN").set(social_security_number);
+    firebaseRef.child("ID").set(uid);
+
+    email_address = email_address.replace('.',"");
+    console.log(email_address);
+    firebaseRef_position.child(email_address).set("Employee");
+
 }
