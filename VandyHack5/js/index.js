@@ -1,16 +1,4 @@
 $(document).ready(function(){
-    $("#pic1Input").change(function(event){
-        $('#pic1')
-            .attr('src', event.target.result)
-            .width(150)
-            .height(200);
-    });
-    $("#pic2Input").change(function(event){
-        $('#pic2')
-            .attr('src', event.target.result)
-            .width(150)
-            .height(200);
-    });
     $("#btnSaveEmployeeDetails").click('input', function(){
         
        addEmployee();
@@ -31,9 +19,11 @@ $(document).ready(function(){
      $("#btnSaveManagerDetails").click('input', function(){
         console.log("Button was clicked!");
 
+        authManager();
         addRepo();
+        //setTimeout(addRepo,4000);
 
-        setTimeout(addManagerToDatabase,3000);
+        setTimeout(addManagerToDatabase,2500);
 
        
     });
@@ -46,17 +36,18 @@ $(document).ready(function(){
 
 });
 
-
+var lat, long;
+var auth = firebase.auth();
 
 function addManagerToDatabase (){
 
-    var firebaseRef = firebase.database().ref().child('Manager');
-
-    var auth = firebase.auth();
+    var uid = auth.currentUser.uid;
+    console.log(uid);
+    var firebaseRef = firebase.database().ref().child('Manager').child(uid);
+    var firebaseRef_WhoThis = firebase.database().ref().child("Who's_This?");
 
     var manager_name = $("#manager_name").val();
-    var manager_pass = $("#manager_password_manager").val();
-    var manager_email = $('#manager_email_address').val();
+    var manager_email = $('#manager_email_address').val(); 
     var phone_number = $("#manager_contact_number").val();
     var bussiness_name = $("#business_name").val()
     var store_number = $('#store_number').val();
@@ -74,22 +65,28 @@ function addManagerToDatabase (){
     firebaseRef.child("County").set(bussiness_county);
     firebaseRef.child("State").set(bussiness_state);
     firebaseRef.child("Zip").set(bussiness_zip);
-   
     console.log(lat);
-    console.log(long);
-
-
     firebaseRef.child("Lat").set(lat);
     firebaseRef.child("Long").set(long); 
+    firebaseRef.child("ID").set(uid);
 
     
-    //auth.createUserWithEmailAndPassword(manager_email, manager_pass);
-   
+    manager_email = manager_email.replace('.',"");
+    console.log(manager_email);
+    firebaseRef_WhoThis.child(manager_email).set("Manager");
     
 
 }
 
-var lat, long;
+function authManager () {
+    var manager_pass = $("#manager_password").val();
+    var manager_email = $('#manager_email_address').val();
+   
+    auth.createUserWithEmailAndPassword(manager_email, manager_pass);
+    
+}
+
+
 function addRepo() {
     var street = $("#street_address").val();
     street = street.split(' ').join('');
@@ -102,6 +99,9 @@ function addRepo() {
 
             lat = res["resourceSets"][0]["resources"][0]["geocodePoints"][0]["coordinates"][0];
             long = res["resourceSets"][0]["resources"][0]["geocodePoints"][0]["coordinates"][1];
+
+            console.log(lat);
+            console.log(long);
 
         },
 
