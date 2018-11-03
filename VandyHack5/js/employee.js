@@ -13,14 +13,8 @@ $(document).ready(function(){
     });
     $("#btnSaveEmployeeDetails").click('input', function(){
         console.log("Button was clicked!");
-        var firebaseRef = firebase.database().ref();
-        var employee_name = $('#employee_name').val();
-        var phone_number = $('#phone_number').val();
-        var email_address = $('#email_address').val();
-        var social_security_number = $('#social_security_number').val();
-      
        addEmployee();
-
+       
     });
 
 });
