@@ -13,6 +13,9 @@ $(document).ready(function(){
     });
     $("#btnSaveEmployeeDetails").click('input', function(){
         console.log("Button was clicked!");
+
+        var firebaseRef = firebase.database().ref();
+        firebaseRef.child("Text").set("some value");
     });
 
 });
