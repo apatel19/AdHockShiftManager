@@ -14,6 +14,7 @@ $(document).ready(function(){
        
     });
 
+
     $("#btnManager").click('input', function(){
         $("#cardInitial").hide();
         $("#cardManagerSignUp").show();
@@ -50,9 +51,25 @@ $(document).ready(function(){
         $("#btnSignOut").hide();
         $("#cardLogin").show();
         $("#cardManagerSignUp").hide();
+        $("#cardAddBusiness").hide();
         $("#cardEmployeeSignUp").hide();
         $("#cardInitial").hide();
      });
+
+     $("#btnAddMyEmployee").click('input', function(){
+        $("#addEmployee").show();
+     });
+
+    
+     $("#btnAddMyEmployeeEmail").click('input', function(){
+        $("#addEmployee").hide();
+        var autoid = makeid();
+        var firebaseRef = firebase.database().ref().child('Manager').child(currentUserId).child("Employer Emails");
+        console.log($('#my_employee_email').val())
+        firebaseRef.child(autoid).set($('#my_employee_email').val());
+
+     });
+
 
      $("#btnSubmitLogin").click('input', function(){
 
@@ -81,7 +98,15 @@ $(document).ready(function(){
 });
 
 
-
+function makeid() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  
+    for (var i = 0; i < 5; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+  
+    return text;
+  }
 
 
 var auth = firebase.auth();
@@ -153,6 +178,7 @@ function LoadManagerPortal()
     $("#btnSignOut").hide();
     $("#cardLogin").hide();
     $("#cardManagerSignUp").hide();
+    $("#cardAddBusiness").hide();
     $("#cardEmployeeSignUp").hide();
     $("#cardInitial").hide();
     $("#cardEmployeePortal").hide();
@@ -164,6 +190,8 @@ function LoadEmployeePortal()
 {
     $("#btnSignOut").hide();
     $("#cardLogin").hide();
+    $("#cardAddBusiness").hide();
+
     $("#cardManagerSignUp").hide();
     $("#cardEmployeeSignUp").hide();
     $("#cardInitial").hide();
