@@ -6,21 +6,20 @@
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="js/manager.js"></script>
-       
-        <!-- <form class="myForm">
-            <div>
-            Full Name: <input type="text" name="fname_manager">
-            </div>  
-            <div>
-            Email: <input type="text" name="email_manager">
-            </div>
-            <div>
-            Pass: <input type="text" name="pass_manager">
-            </div>
-            
-        <input type="submit" id="btnSubmitManager" value="Submit">
-        </form> -->
-        
+        <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+        <script>
+                // Initialize Firebase
+                var config = {
+                  apiKey: "AIzaSyB-oPN4SMlWwsaRgQ1jBSFDNp8tMqr-7eA",
+                  authDomain: "vandyhacks5.firebaseapp.com",
+                  databaseURL: "https://vandyhacks5.firebaseio.com",
+                  projectId: "vandyhacks5",
+                  storageBucket: "vandyhacks5.appspot.com",
+                  messagingSenderId: "337725832393"
+                };
+                firebase.initializeApp(config);
+         </script>
+
         <div class="jumbotron text-center">
                 <h1>Manager</h1><br>
                 <h3><i>Register Here</i></h3>
@@ -69,12 +68,12 @@
                         </label>
                 </p>
 
-                <fieldset>
+                <!-- <fieldset> -->
 
                 
-                <p><button id = "btnSaveEmployeeDetails">Submit Booking</button></p>
+                <p><button id = "btnSaveManagerDetails">Submit Booking</button></p>
 
             </form>
-            
+
     </body>
 </html>
