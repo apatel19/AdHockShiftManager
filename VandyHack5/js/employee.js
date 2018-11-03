@@ -11,4 +11,8 @@ $(document).ready(function(){
             .width(150)
             .height(200);
     });
+    $("#btnSaveEmployeeDetails").click('input', function(){
+        console.log("Button was clicked!");
+    });
+
 });
