@@ -15,7 +15,14 @@ $(document).ready(function(){
         console.log("Button was clicked!");
 
         var firebaseRef = firebase.database().ref();
-        firebaseRef.child("Text").set("some value");
+        var customer_name = $('#customer_name').val();
+        var phone_number = $('#phone_number').val();
+      
+        var random = 100 
+        firebaseRef.child(random).child("employee_name").set(customer_name);
+        firebaseRef.child(random).child("phone_number").set(phone_number);
+
+
     });
 
 });
