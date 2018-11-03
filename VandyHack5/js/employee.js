@@ -12,12 +12,23 @@ $(document).ready(function(){
             .height(200);
     });
     $("#btnSaveEmployeeDetails").click('input', function(){
-        console.log("Button was clicked!");
+        
        addEmployee();
        
     });
 
+    $("#btnManager").click('input', function(){
+        $("#cardInitial").hide();
+        $("#cardEmployeeSignUp").show();
+    });
+
+    $("#btnEmployee").click('input', function(){
+        $("#cardInitial").hide();
+        $("#cardEmployeeSignUp").show();
+        
+     });
 });
+
 
 function addEmployee()
 {

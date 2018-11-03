@@ -8,6 +8,11 @@
     margin-left: 5%;
 }
 
+.buttonCard{
+    width:80%;
+    align-self: center;
+}
+
 * {
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;

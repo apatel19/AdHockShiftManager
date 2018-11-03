@@ -21,8 +21,8 @@
   firebase.initializeApp(config);
 </script>
             
-            <div class="login-cover">
-                    <!-- MDL Spinner Component -->
+<div class="login-cover">
+<!-- MDL Spinner Component -->
                 
           
   <div class="mdl-layout mdl-js-layout">
@@ -38,16 +38,44 @@
               <button id="signOutBtn" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
                 Sign Out <i class="button-right-icon material-icons">account_circle</i>
               </button>
+              <button id="BtnLogin" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                    Login <i class="button-right-icon material-icons">account_circle</i>
+                  </button>
             </nav>
           </div>
         </header>
-        <div class="mdl-layout__drawer">
-        </div>
+        <!-- <div class="mdl-layout__drawer">
+        </div> -->
       </div>
-                  
-        <br><br>
+      <br>
+      <br>
 
-            <div class="demo-card-wide mdl-card mdl-shadow--2dp" >
+
+    
+      <!-- Primary-colored flat button -->
+    
+      <div class="demo-card-wide mdl-card mdl-shadow--2dp" id = "cardInitial">
+            <div class="mdl-card__title">
+              <h2 class="mdl-card__title-text" > Are you a...</h2>
+            </div>
+            <br>
+<button s class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent buttonCard" id="btnManager">
+        Manager
+      </button>
+      <br>
+ <center> OR </center> 
+ <br>
+<button   class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent buttonCard" id = "btnEmployee">
+        Employee
+      </button>
+      <br>
+    </div>
+
+            <br>
+
+                  
+    
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="display:none" id = "cardEmployeeSignUp">
                     <div class="mdl-card__title">
                       <h2 class="mdl-card__title-text">Employee Sign Up!</h2>
                     </div>
@@ -55,7 +83,7 @@
             <form class="myForm" action="javascript:void(0);" >
 
                 <!-- Simple Textfield -->
-                <label class = "fieldlabel" te>Name </label> 
+                <label class = "fieldlabel" >Name </label> 
         <div class="mdl-textfield mdl-js-textfield"> 
           <input class="mdl-textfield__input fieldInput" type="text" id="employee_name" required>
           <label class="mdl-textfield__label fieldInput" for="employee_name">Text...</label>
