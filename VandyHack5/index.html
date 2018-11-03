@@ -33,12 +33,20 @@
               <span class="page-title-span"> | </span>
               <span class="page-title-span"> Employee Portal </span>
             </span>
+            <span class="mdl-layout__title" >
+                <span><button   class="mdl-button mdl-js-button page-title-span mdl-button--raised mdl-js-ripple-effect mdl-button--accent buttonCard" id = "btnListBusiness">
+                    Business
+                  </button> </span>
+                <span>  <button   class="mdl-button mdl-js-button page-title-span mdl-button--raised mdl-js-ripple-effect mdl-button--accent buttonCard" id = "btnListEmployee">
+                      Employee(s)
+                    </button> </span>
+              </span>
             <div class="mdl-layout-spacer"></div>
             <nav class="mdl-navigation">
-              <button id="signOutBtn" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+              <button id="btnSignOut" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
                 Sign Out <i class="button-right-icon material-icons">account_circle</i>
               </button>
-              <button id="BtnLogin" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+              <button id="btnLogin" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
                     Login <i class="button-right-icon material-icons">account_circle</i>
                   </button>
             </nav>
@@ -47,11 +55,83 @@
         <!-- <div class="mdl-layout__drawer">
         </div> -->
       </div>
-      <br>
-      <br>
+   
 
 
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="display:none" id = "cardLogin">
+            <div class="mdl-card__title">
+              <h2 class="mdl-card__title-text" > Login to Day_work</h2>
+            </div>
+            <label  class = "fieldlabel">Email </label>
+            <div class="mdl-textfield mdl-js-textfield">  
+                    <input class="mdl-textfield__input fieldInput" type="text" id="login_email_address" required>
+              <label class="mdl-textfield__label fieldInput" for="login_email_address">email...</label>
+            </div>
+            <br><br>
+
+            <label  class = "fieldlabel">Password </label>
+            <div class="mdl-textfield mdl-js-textfield">  
+                    <input class="mdl-textfield__input fieldInput" type="text" id="login_password" required>
+              <label class="mdl-textfield__label fieldInput" for="login_password">password...</label>
+            </div>
+            
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent fieldInput" id = "btnSubmitLogin">
+                enter
+              </button>
+            
+    </div>
+      
+
+
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp"  style="display:none" id = "cardEmployeePortal">
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text" > Employee Portal</h2>
+        </div>
+        <label  class = "fieldlabel">Email </label>
+        <div class="mdl-textfield mdl-js-textfield">  
+                <input class="mdl-textfield__input fieldInput" type="text" id="login_email_address" required>
+          <label class="mdl-textfield__label fieldInput" for="login_email_address">email...</label>
+        </div>
+        <br><br>
+
+        <label  class = "fieldlabel">Password </label>
+        <div class="mdl-textfield mdl-js-textfield">  
+                <input class="mdl-textfield__input fieldInput" type="text" id="login_password" required>
+          <label class="mdl-textfield__label fieldInput" for="login_password">password...</label>
+        </div>
+        
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent fieldInput" id = "btnSubmitLogin">
+            enter
+          </button>
+        
+</div>
+
+
+<div class="demo-card-wide mdl-card mdl-shadow--2dp" style="display:none" id = "cardManagerPortal">
+    <div class="mdl-card__title">
+      <h2 class="mdl-card__title-text" > Manager Portal</h2>
+    </div>
+    <label  class = "fieldlabel">Email </label>
+    <div class="mdl-textfield mdl-js-textfield">  
+            <input class="mdl-textfield__input fieldInput" type="text" id="login_email_address" required>
+      <label class="mdl-textfield__label fieldInput" for="login_email_address">email...</label>
+    </div>
+    <br><br>
+
+    <label  class = "fieldlabel">Password </label>
+    <div class="mdl-textfield mdl-js-textfield">  
+            <input class="mdl-textfield__input fieldInput" type="text" id="login_password" required>
+      <label class="mdl-textfield__label fieldInput" for="login_password">password...</label>
+    </div>
     
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent fieldInput" id = "btnSubmitLogin">
+        enter
+      </button>
+    
+</div>
+
+
+
       <!-- Primary-colored flat button -->
     
       <div class="demo-card-wide mdl-card mdl-shadow--2dp" id = "cardInitial">
@@ -59,7 +139,7 @@
               <h2 class="mdl-card__title-text" > Are you a...</h2>
             </div>
             <br>
-<button s class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent buttonCard" id="btnManager">
+<button  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent buttonCard" id="btnManager">
         Manager
       </button>
       <br>

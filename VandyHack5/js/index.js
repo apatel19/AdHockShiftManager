@@ -1,8 +1,12 @@
+var lat, long;
+var currentUserId;
+var isManager = -1; // 0 means is employee; 1 means is manager, -1 means is not defined.
+
 $(document).ready(function(){
     $("#btnSaveEmployeeDetails").click('input', function(){
         
        addEmployee();
-       
+       LoadEmployeePortal();
     });
 
     $("#btnManager").click('input', function(){
@@ -24,7 +28,7 @@ $(document).ready(function(){
         //setTimeout(addRepo,4000);
 
         setTimeout(addManagerToDatabase,2500);
-
+        LoadManagerPortal();
        
     });
 
@@ -34,14 +38,55 @@ $(document).ready(function(){
         
      });
 
+     $("#btnLogin").click('input', function(){
+        $("#btnSignOut").hide();
+        $("#cardLogin").show();
+        $("#cardManagerSignUp").hide();
+        $("#cardEmployeeSignUp").hide();
+        $("#cardInitial").hide();
+     });
+
+     $("#btnSubmitLogin").click('input', function(){
+
+     var auth = firebase.auth();
+     auth.signInWithEmailAndPassword($('#login_email_address').val(), $('#login_password').val());
+     setTimeout(nothing,2500);
+     currentUserId = auth.currentUserId;
+     var email = $('#login_email_address').val();
+     email = email.replace(".","");
+ 
+     return firebase.database().ref('/position/' + email).once('value').then(function(snapshot) {
+         if (snapshot["node_"]["value_"] == "Employee")
+         {
+             isManager = 0;
+             LoadEmployeePortal();
+         }
+         else
+         {
+             isManager = 1;
+             LoadManagerPortal();
+         }
+
+     });
+
+     });
 });
 
-var lat, long;
+
+
+
+
 var auth = firebase.auth();
 
+function nothing()
+{
+    console.log("nothing wait");
+}
 function addManagerToDatabase (){
 
     var uid = auth.currentUser.uid;
+     currentUserId = uid;
+     isManager = 1;
     console.log(uid);
     var firebaseRef = firebase.database().ref().child('Manager').child(uid);
     var firebaseRef_WhoThis = firebase.database().ref().child("Who's_This?");
@@ -59,23 +104,19 @@ function addManagerToDatabase (){
     firebaseRef.child("Name").set(manager_name);
     firebaseRef.child("Email").set(manager_email);
     firebaseRef.child("Phone").set(phone_number);
-    firebaseRef.child("Bussiness Name").set(bussiness_name);
-    firebaseRef.child("Store Number").set(store_number);
-    firebaseRef.child("Street").set(bussiness_street);
-    firebaseRef.child("County").set(bussiness_county);
-    firebaseRef.child("State").set(bussiness_state);
-    firebaseRef.child("Zip").set(bussiness_zip);
+    firebaseRef.child("Business").child("Bussiness Name").set(bussiness_name);
+    firebaseRef.child("Business").child("Store Number").set(store_number);
+    firebaseRef.child("Business").child("Street").set(bussiness_street);
+    firebaseRef.child("Business").child("County").set(bussiness_county);
+    firebaseRef.child("Business").child("State").set(bussiness_state);
+    firebaseRef.child("Business").child("Zip").set(bussiness_zip);
     console.log(lat);
-    firebaseRef.child("Lat").set(lat);
-    firebaseRef.child("Long").set(long); 
-    firebaseRef.child("ID").set(uid);
-
-    
+    firebaseRef.child("Business").child("Lat").set(lat);
+    firebaseRef.child("Business").child("Long").set(long); 
+    firebaseRef.child("Business").child("ID").set(uid);
     manager_email = manager_email.replace('.',"");
     console.log(manager_email);
     firebaseRef_WhoThis.child(manager_email).set("Manager");
-    
-
 }
 
 function authManager () {
@@ -86,6 +127,30 @@ function authManager () {
     
 }
 
+
+function LoadManagerPortal()
+{
+    $("#btnSignOut").hide();
+    $("#cardLogin").hide();
+    $("#cardManagerSignUp").hide();
+    $("#cardEmployeeSignUp").hide();
+    $("#cardInitial").hide();
+    $("#cardEmployeePortal").hide();
+
+    $("#cardManagerPortal").show();
+}
+
+function LoadEmployeePortal()
+{
+    $("#btnSignOut").hide();
+    $("#cardLogin").hide();
+    $("#cardManagerSignUp").hide();
+    $("#cardEmployeeSignUp").hide();
+    $("#cardInitial").hide();
+    $("#cardManagerPortal").hide();
+  
+    $("#cardEmployeePortal").show();
+}
 
 function addRepo() {
     var street = $("#street_address").val();
