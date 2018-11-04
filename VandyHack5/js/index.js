@@ -217,46 +217,42 @@ function LoadManagerPortal()
 
     $("#cardManagerPortal").show();
 
-
-    // return firebase.database().ref('/manager/' + auth.currentUser.uid + '/Employ').once('value').then(function(snapshot) {
-    //     snapshot.forEach(function(childSnapshot) {
-    //                var childData = childSnapshot.val();
-    //                for(i =0; i < childData.length; i++)
-    //                {
-
                 
 
-
 var leadsRef = firebase.database().ref('/Manager/'+ auth.currentUser.uid +'/Employer Emails' );
+var arrayofEmails = [];
     leadsRef.on('value', function(snapshot) {
+        arrayofEmails = [];
         snapshot.forEach(function(childSnapshot) {
           var childData = childSnapshot.val();
+          arrayofEmails.push(childData);
           console.log(childData);
+          
         });
-
-
-
+        console.log(arrayofEmails);
+       createEmployeeListMarkUp(arrayofEmails);
 
     //    for (var i = 0; i <  snapshot.length; i++)
     //    {
     //     snapshot
     //    } 
-    console.log(snapshot);
+
 });
     
 
 }
 
-function createTimelineMarkUp( )
+function createEmployeeListMarkUp( emailArray )
 {
-    document.getElementById("timeline").innerHTML = "";
-    for ( i = timelineIndex ; i< timelineIndex + timelinelength; i++)
+    $("#yourEmployees").html(" ");
+    $("#yourEmployees").append('<ul class="demo-list-icon mdl-list">');
+    for (var i =0; i< emailArray.length; i++)
     {
-    $("#timeline").append(" <div class='col' id='timelinediv" + i +"' style='text-align:center; font-size:15;'>" + commitIds[i].substring(0, 5) 
-    +
-      "<div class='col' id='timelinedate" + i +"' style='text-align:center; font-size:10;'>" + commitDates[i] +" </div></div>");
+    $("#yourEmployees").append(' <li class="mdl-list__item"> <span class="mdl-list__item-primary-content"><i class="material-icons mdl-list__item-icon">person</i> ' +  emailArray[i] +' </span> </li>"');
     }
+    $("#yourEmployees").append('</ul>');
 }
+
 
 function LoadEmployeePortal()
 {
