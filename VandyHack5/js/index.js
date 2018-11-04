@@ -7,7 +7,9 @@ $(document).ready(function(){
         
         var email_address = $('#employee_email_address').val();
         console.log(email_address);
+        
         verifyEmailWhichExistsInManagerDatabase(email_address);
+        
         var employee_password = $('#employee_password').val();
         createUser(email_address, employee_password);
         setTimeout(addEmployeeToDatabase, 2500);
@@ -85,16 +87,30 @@ $(document).ready(function(){
 });
 
 function verifyEmailWhichExistsInManagerDatabase(email){
+    var myDict = []; 
+    var i = 0;
+    var leadsRef = firebase.database().ref('Manager');
+    
+    leadsRef.on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var childData = childSnapshot.val();
+          myDict.push([i, childData["Employer Emails"]]);
+          //   console.log(childData["Employer Emails"].forEach);
+            i++;
+        });
+    });
+    
+    // setTimeout(3000,console.log(myDict[0]));
+//     var leadsRef = firebase.database().ref('/Manager/'+ auth.currentUser.uid +'/Employer Emails' );
+//     leadsRef.on('value', function(snapshot) {
+//         snapshot.forEach(function(childSnapshot) {
+//           var childData = childSnapshot.val();
+//           console.log(childData);
+          
+//         });
 
-    // var leadsRef = firebase.database().ref('Manager');
-    // leadsRef.on('value', function(snapshot) {
-    //     snapshot.forEach(function(childSnapshot) {
-    //       var childData = childSnapshot.val();
-    //       console.log(childData["Bussiness Name"]);
-    //     });
-    // });
-   
-
+//     }
+// }
 }
 
 function makeid() {
