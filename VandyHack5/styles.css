@@ -4,6 +4,17 @@
     margin-left: 5%;
 }
 
+.hidden_verified_employeeLabel{
+  visibility:hidden;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+
 
 .fieldInput{
     margin-left: 5%;
