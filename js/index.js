@@ -71,13 +71,18 @@ $(document).ready(function(){
     $("#btnShowBusinessForm").click('input', function(){
      
         $("#cardAddBusiness").show();
+        $("#cardManagerSignUp").hide();
         
      });
 
      $("#btnSignOut").click('input', function(){
-
+        $("#btnLogin").show();
+        $("#btnSignOut").hide();
         firebase.auth().signOut().then(function() {
             console.log('Signed Out');
+            closeAllCards();
+
+           $("#cardInitial").show();
           }, function(error) {
             console.error('Sign Out Error', error);
           });
@@ -156,7 +161,8 @@ $(document).ready(function(){
      var schedule = [];
      $("#btnTable").click('input', function(){
 
-        console.log("Working");
+        window.confirm("Your Schedule has been submitted! To change values, just update checkboxes and hit save again!");
+
 
         if (document.getElementById("Monday_Morning").checked){
             monday[0] = 1;

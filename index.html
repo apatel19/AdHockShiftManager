@@ -38,7 +38,7 @@
            
             <div class="mdl-layout-spacer"></div>
             <nav class="mdl-navigation">
-              <button id="btnSignOut" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+              <button id="btnSignOut" style = "display: none" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
                 Sign Out <i class="button-right-icon material-icons">account_circle</i>
               </button>
               <button id="btnLogin" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
@@ -69,7 +69,7 @@
               <label class="mdl-textfield__label fieldInput" for="login_password">password...</label>
             </div>
             
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent fieldInput" id = "btnSubmitLogin">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent " id = "btnSubmitLogin">
                 enter
               </button>      
     </div>
@@ -80,8 +80,9 @@
         <div class="mdl-card__title">
           <h2 class="mdl-card__title-text" > <label id="employeePortal"> Welcome </h2>
     </div>
-      
-      
+  <h5> Please Mark Your Schedule Availability for Add Hock Shifts! </H5>
+    <h6> Selecting checkboxes will mark you available for those timings...</h6>
+
     <table style="width:50%">
         <tr>
           <th>Day</th>
@@ -132,9 +133,10 @@
           <td><input id="Sunday_Night" type="checkbox" name="" value=1></td>  
             </tr>
       </table>
-      <button id = "btnTable">
-          Submit
-        </button>  
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent fieldInput" id = "btnTable">
+          Save Your Schedule
+        </button>
+     
 </div>
 
 
@@ -222,7 +224,7 @@
 
 <div class="demo-card-wide mdl-card mdl-shadow--2dp"  style=" width: 43%" id ="cardSearchResult">
   <div class="mdl-card__title">
-    <h4 class="mdl-card__title-text" > Results:</h4>
+    <h5 class="mdl-card__title-text" > Results:</h5>
   </div>     
 
   <div id = "divSearchResults"> 
