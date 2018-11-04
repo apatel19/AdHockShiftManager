@@ -110,10 +110,25 @@ $(document).ready(function(){
 
 
      $("#btnSubmitLogin").click('input', function(){
-        closeAllCards();
-        auth.signInWithEmailAndPassword($('#login_email_address').val(), $('#login_password').val());
+       // closeAllCards();
+    //     auth.signInWithEmailAndPassword($('#login_email_address').val(), $('#login_password').val());
 
-     setTimeout(loadCurrentUserID(auth),2500);
+    //  setTimeout(loadCurrentUserID(auth),2500);
+
+     firebase.auth().signInWithEmailAndPassword($('#login_email_address').val(), $('#login_password').val()).then(function(user) {
+        closeAllCards(); 
+        setTimeout(loadCurrentUserID(auth),2500); 
+     }).catch(function(error) {
+         var errorCode = error.code;
+         var errorMessage = error.message;
+     
+         if (errorCode === 'auth/wrong-password') {
+             alert('Wrong password.');
+         } else {
+             alert(errorMessage);         
+         }
+         console.log(error);
+     });
      
      });
 
