@@ -4,9 +4,10 @@ var isManager = -1; // 0 means is employee; 1 means is manager, -1 means is not 
 var auth = firebase.auth();
 $(document).ready(function(){
     $("#btnSaveEmployeeDetails").click('input', function(){
-
+        
         var email_address = $('#employee_email_address').val();
         console.log(email_address);
+        verifyEmailWhichExistsInManagerDatabase(email_address);
         var employee_password = $('#employee_password').val();
         createUser(email_address, employee_password);
         setTimeout(addEmployeeToDatabase, 2500);
@@ -83,6 +84,18 @@ $(document).ready(function(){
      });
 });
 
+function verifyEmailWhichExistsInManagerDatabase(email){
+
+    // var leadsRef = firebase.database().ref('Manager');
+    // leadsRef.on('value', function(snapshot) {
+    //     snapshot.forEach(function(childSnapshot) {
+    //       var childData = childSnapshot.val();
+    //       console.log(childData["Bussiness Name"]);
+    //     });
+    // });
+   
+
+}
 
 function makeid() {
     var text = "";
