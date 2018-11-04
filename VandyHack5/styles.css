@@ -1,6 +1,7 @@
 .fieldlabel {
     align-items:left;
     align-content: left;
+    float: left;
     margin-left: 5%;
 }
 
@@ -14,6 +15,9 @@ td, th {
   padding: 8px;
 }
 
+#cardSearchBox1, #cardSearchBox{
+  float: left;
+}
 
 
 .fieldInput{

@@ -62,7 +62,6 @@
                     <input class="mdl-textfield__input fieldInput" type="text" id="login_email_address" required>
               <label class="mdl-textfield__label fieldInput" for="login_email_address">email...</label>
             </div>
-            <br><br>
 
             <label  class = "fieldlabel">Password </label>
             <div class="mdl-textfield mdl-js-textfield">  
@@ -173,9 +172,8 @@
 
 
   
-    <div class="demo-card-wide mdl-card mdl-shadow--2dp"  style="display:none ; width: 95%" id ="cardSearchBox">
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp"  style="display:none ; width: 43%" id ="cardSearchBox">
         <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text" > Search Box</h2>
         </div>     
       <div class="center-on-page">
         
@@ -214,17 +212,22 @@
                   <span class="mdl-textfield__error fieldInput">Input is not a number!</span>
           </div>  
 
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent fieldInput" id = "btnSearch">
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent " id = "btnSearch">
               Search!
             </button>
-
-</div>
-    
+            
 </div>
 
+<div class="demo-card-wide mdl-card mdl-shadow--2dp"  style=" width: 43%" id ="cardSearchResult">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text" > Results:</h2>
+  </div>     
 
-    
+  <div id = "divSearchResults"> 
+    <div id="searchResults"></div>
   </div>
+</div>  
+</div>
       <!-- Primary-colored flat button -->
     
       <div class="demo-card-wide mdl-card mdl-shadow--2dp" id = "cardInitial">
@@ -242,13 +245,12 @@
         Employee
       </button>
       <br>
-    </div>
-            <br>
+    </div> 
             <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="display:none" id = "cardEmployeeSignUp">
                     <div class="mdl-card__title">
                       <h2 class="mdl-card__title-text">Employee Sign Up!</h2>
                     </div>
-                    <br><br>
+                    <br>
             <form class="myForm" action="javascript:void(0);" >
 
                 <!-- Simple Textfield -->
@@ -258,27 +260,27 @@
           <label class="mdl-textfield__label fieldInput" for="employee_name">Text...</label>
         </div>
 
-        <br><br>
+        <br>
         <label  class = "fieldlabel">Email </label>
         <div class="mdl-textfield mdl-js-textfield">  
                 <input class="mdl-textfield__input fieldInput" type="text" id="employee_email_address" required>
           <label class="mdl-textfield__label fieldInput" for="employee_email_address">email...</label>
         </div>
-        <br><br>
+        <br>
 
         <label  class = "fieldlabel">Password </label>
         <div class="mdl-textfield mdl-js-textfield">  
                 <input class="mdl-textfield__input fieldInput" type="text" id="employee_password" required>
           <label class="mdl-textfield__label fieldInput" for="employee_password">Password...</label>
         </div>
-        <br><br>
+        <br>
 
         <label class="fieldlabel">SNN </label> 
         <div class="mdl-textfield mdl-js-textfield ">
                 <input class="mdl-textfield__input fieldInput" type="text" id="employee_social_security_number" required>
           <label class="mdl-textfield__label fieldInput" for="employee_social_security_number">EX: 987-34-5555</label>
         </div>
-        <br><br>
+        <br>
 
         <label  class = "fieldlabel" >Phone Number </label> 
         <div class="mdl-textfield mdl-js-textfield">
@@ -286,7 +288,7 @@
           <label class="mdl-textfield__label fieldInput" for="employee_phone_number">Number...</label>
           <span class="mdl-textfield__error fieldInput">Input is not a number!</span>
         </div>
-        <br> <br>
+        <br> 
 
         
         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent fieldInput" id = "btnSaveEmployeeDetails">
@@ -296,95 +298,99 @@
               <label id="notVerified" class="hidden_verified_employeeLabel"> Not Verified </label>
             </form>
             </div>
-                    <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="display:none" id = "cardManagerSignUp">
-                            <div class="mdl-card__title">
-                              <h2 class="mdl-card__title-text">Manager Sign Up!</h2>
-                            </div>
-                            <br><br>
-                    <form class="myForm" action="javascript:void(0);" >
-
-                            <label class = "fieldlabel" >Name </label> 
-                            <div class="mdl-textfield mdl-js-textfield"> 
-                              <input class="mdl-textfield__input fieldInput" type="text" id="manager_name" required>
-                              <label class="mdl-textfield__label fieldInput" for="manager_name">Text...</label>
-                            </div>
-                            <br><br>
-                            <label  class = "fieldlabel">Email </label>
-                            <div class="mdl-textfield mdl-js-textfield">  
-                                    <input class="mdl-textfield__input fieldInput" type="text" id="manager_email_address" required>
-                              <label class="mdl-textfield__label fieldInput" for="manager_email_address">email...</label>
-                            </div>
-                            <br><br>
-                            <label  class = "fieldlabel">Password </label>
-                            <div class="mdl-textfield mdl-js-textfield">  
-                                    <input class="mdl-textfield__input fieldInput" type="text" id="manager_password" required>
-                              <label class="mdl-textfield__label fieldInput" for="manager_password">email...</label>
-                            </div>
-                            <br><br>
-                            <label  class = "fieldlabel" >Contact Number </label> 
-                            <div class="mdl-textfield mdl-js-textfield">
-                              <input class="mdl-textfield__input fieldInput" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="manager_contact_number" required>
-                              <label class="mdl-textfield__label fieldInput" for="manager_contact_number">Number...</label>
-                              <span class="mdl-textfield__error fieldInput">Input is not a number!</span>
-                            </div>
-                            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id = 'btnShowBusinessForm'>
-                                    <i class="material-icons">arrow_right_alt</i>
-                                  </button>
-                            
-                                </form>
-                                </div>
 
 
-                                <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="display:none" id = "cardAddBusiness">
-                                        <div class="mdl-card__title">
-                                          <h2 class="mdl-card__title-text">Lets add your primary business...</h2>
-                                        </div>
-                                        <br><br>
-                                <form class="myForm" action="javascript:void(0);" >
 
-                            <br><br>
-                            <label  class = "fieldlabel">Business Name </label>
-                            <div class="mdl-textfield mdl-js-textfield">  
-                                    <input class="mdl-textfield__input fieldInput" type="text" id="business_name" required>
-                              <label class="mdl-textfield__label fieldInput" for="business_name">Name of your primary business...</label>
-                            </div>
-                            <br><br>
-                            <label  class = "fieldlabel">Store Number </label>
-                            <div class="mdl-textfield mdl-js-textfield">  
-                                    <input class="mdl-textfield__input fieldInput" type="text" id="store_number">
-                              <label class="mdl-textfield__label fieldInput" for="store_number">Store Number if Any</label>
-                            </div>
-                            <br><br>
-                            <label  class = "fieldlabel">Business Street Address </label>
-                            <div class="mdl-textfield mdl-js-textfield">  
-                                    <input class="mdl-textfield__input fieldInput" type="text" id="street_address">
-                              <label class="mdl-textfield__label fieldInput" for="street_address">Ex: 6122, Lake Vista Dr</label>
-                            </div>
-                            
-                            <label  class = "fieldlabel">County</label>
-                            <div class="mdl-textfield mdl-js-textfield">  
-                                    <input class="mdl-textfield__input fieldInput" type="text" id="county">
-                              <label class="mdl-textfield__label fieldInput" for="county">Ex: Tuscaloosa</label>
-                            </div>
+
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="display:none" id = "cardManagerSignUp">
+                    <div class="mdl-card__title">
+                      <h2 class="mdl-card__title-text">Manager Sign Up!</h2>
+                    </div>
+                    <br><br>
+            <form class="myForm" action="javascript:void(0);" >
+
+                    <label class = "fieldlabel" >Name </label> 
+                    <div class="mdl-textfield mdl-js-textfield"> 
+                      <input class="mdl-textfield__input fieldInput" type="text" id="manager_name" required>
+                      <label class="mdl-textfield__label fieldInput" for="manager_name">Text...</label>
+                    </div>
+                  
+                    <label  class = "fieldlabel">Email </label>
+                    <div class="mdl-textfield mdl-js-textfield">  
+                            <input class="mdl-textfield__input fieldInput" type="text" id="manager_email_address" required>
+                      <label class="mdl-textfield__label fieldInput" for="manager_email_address">email...</label>
+                    </div>
+                  
+                    <label  class = "fieldlabel">Password </label>
+                    <div class="mdl-textfield mdl-js-textfield">  
+                            <input class="mdl-textfield__input fieldInput" type="text" id="manager_password" required>
+                      <label class="mdl-textfield__label fieldInput" for="manager_password">email...</label>
+                    </div>
                     
-                            <label  class = "fieldlabel">State</label>
-                            <div class="mdl-textfield mdl-js-textfield">  
-                                    <input class="mdl-textfield__input fieldInput" type="text" id="state">
-                              <label class="mdl-textfield__label fieldInput" for="state">Ex: AL</label>
-                            </div>
-                            <label  class = "fieldlabel">Zipcode</label>
-                            <div class="mdl-textfield mdl-js-textfield">
-                                    <input class="mdl-textfield__input fieldInput" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="zip_code" required>
-                                    <label class="mdl-textfield__label fieldInput" for="zip_code">Ex: 35406</label>
-                                    <span class="mdl-textfield__error fieldInput">Input is not a number!</span>
-                                  </div>  
-                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent fieldInput" id = "btnSaveManagerDetails">
-                                            Save
-                                          </button>
-                                        </form>
-                                    </div>
+                    <label  class = "fieldlabel" >Contact Number </label> 
+                    <div class="mdl-textfield mdl-js-textfield">
+                      <input class="mdl-textfield__input fieldInput" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="manager_contact_number" required>
+                      <label class="mdl-textfield__label fieldInput" for="manager_contact_number">Number...</label>
+                      <span class="mdl-textfield__error fieldInput">Input is not a number!</span>
+                    </div>
+                    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id = 'btnShowBusinessForm'>
+                            <i class="material-icons">arrow_right_alt</i>
+                          </button>
+                    
                         </form>
-                    <div>
+                        </div>
+
+
+                      <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="display:none" id = "cardAddBusiness">
+                              <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">Lets add your primary business...</h2>
+                              </div>
+                          
+                      <form class="myForm" action="javascript:void(0);" >
+
+          
+                  <label  class = "fieldlabel">Business Name </label>
+                  <div class="mdl-textfield mdl-js-textfield">  
+                          <input class="mdl-textfield__input fieldInput" type="text" id="business_name" required>
+                    <label class="mdl-textfield__label fieldInput" for="business_name">Name of your primary business...</label>
+                  </div>
+                  
+                  <label  class = "fieldlabel">Store Number </label>
+                  <div class="mdl-textfield mdl-js-textfield">  
+                          <input class="mdl-textfield__input fieldInput" type="text" id="store_number">
+                    <label class="mdl-textfield__label fieldInput" for="store_number">Store Number if Any</label>
+                  </div>
+                  
+                  <label  class = "fieldlabel">Business Street Address </label>
+                  <div class="mdl-textfield mdl-js-textfield">  
+                          <input class="mdl-textfield__input fieldInput" type="text" id="street_address">
+                    <label class="mdl-textfield__label fieldInput" for="street_address">Ex: 6122, Lake Vista Dr</label>
+                  </div>
+                  
+                  <label  class = "fieldlabel">County</label>
+                  <div class="mdl-textfield mdl-js-textfield">  
+                          <input class="mdl-textfield__input fieldInput" type="text" id="county">
+                    <label class="mdl-textfield__label fieldInput" for="county">Ex: Tuscaloosa</label>
+                  </div>
+          
+                  <label  class = "fieldlabel">State</label>
+                  <div class="mdl-textfield mdl-js-textfield">  
+                          <input class="mdl-textfield__input fieldInput" type="text" id="state">
+                    <label class="mdl-textfield__label fieldInput" for="state">Ex: AL</label>
+                  </div>
+                  <label  class = "fieldlabel">Zipcode</label>
+                  <div class="mdl-textfield mdl-js-textfield">
+                          <input class="mdl-textfield__input fieldInput" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="zip_code" required>
+                          <label class="mdl-textfield__label fieldInput" for="zip_code">Ex: 35406</label>
+                          <span class="mdl-textfield__error fieldInput">Input should be a number!</span>
+                        </div>  
+                          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent fieldInput" id = "btnSaveManagerDetails">
+                                  Save
+                                </button>
+                              </form>
+                          </div>
+              </form>
+            </div>
 
                 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>

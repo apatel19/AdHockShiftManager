@@ -17,7 +17,12 @@ $(document).ready(function(){
 
     });
 
-    
+    $("#btnSearch").click('input', function(){
+    //    closeAllCards();
+
+       $("#cardSearchResult").show();
+        searchLogic();
+    });
 
 
     $("#btnLoadSearchCard").click('input', function(){
@@ -56,7 +61,7 @@ $(document).ready(function(){
        
         createUser(manager_email, manager_pass);
        
-        callAPItoGetLongLatFromAddress($("#street_address").val(), $("#state").val(), $("#zip_code").val());
+        callAPItoGetLongLatFromAddress($("#street_address").val(), $("#state").val(), $("#zip_code").val(), true);
         //setTimeout(addRepo,4000);
         
         //setTimeout(addManagerToDatabase(lat_and_long[0], lat_and_long[1]),2500);
@@ -65,19 +70,27 @@ $(document).ready(function(){
     });
 
     $("#btnShowBusinessForm").click('input', function(){
-        $("#cardManagerSignUp").hide();
+     
         $("#cardAddBusiness").show();
         
      });
 
-     $("#btnLogin").click('input', function(){
-        $("#btnSignOut").hide();
-        $("#cardLogin").show();
-        $("#cardManagerSignUp").hide();
-        $("#cardAddBusiness").hide();
-        $("#cardEmployeeSignUp").hide();
-        $("#cardInitial").hide();
+     $("#btnSignOut").click('input', function(){
 
+        firebase.auth().signOut().then(function() {
+            console.log('Signed Out');
+          }, function(error) {
+            console.error('Sign Out Error', error);
+          });
+     });
+
+     $("#btnLogin").click('input', function(){
+     
+    closeAllCards();
+    $("#cardLogin").show();
+    $("#btnSignOut").hide();
+
+        //getManagerDatabase();
          //verifyEmailWhichExistsInManagerDatabase("vidhipatel@gmail.com");
 
      });
@@ -98,13 +111,26 @@ $(document).ready(function(){
 
 
      $("#btnSubmitLogin").click('input', function(){
+        closeAllCards();
+        auth.signInWithEmailAndPassword($('#login_email_address').val(), $('#login_password').val());
 
-     
-     auth.signInWithEmailAndPassword($('#login_email_address').val(), $('#login_password').val());
      setTimeout(loadCurrentUserID(auth),2500);
      
-    
      });
+
+
+
+
+     function searchLogic()
+     {
+        $("#search_street_address").val();
+        $("#search_state").val();
+        $("#search_county").val();
+        $("#search_zip_code").val();
+
+        callAPItoGetLongLatFromAddress(  $("#search_street_address").val(), $("#search_state").val(),  $("#search_zip_code").val(), false )
+     }
+
 
      var monday = [];
      var tuesday = [];
@@ -311,6 +337,77 @@ function verifyEmailWhichExistsInManagerDatabase(email){
     );
 }
 
+
+function getEmailsFromJson( string, distance, business )
+{
+    if (string !== null)
+    {
+    var emails = [];
+    var x = string.split(':"');
+    for (var i =1; i < x.length; i++ )
+    {
+    emails.push( x[i].split('"')[0], distance, business);
+    }
+   
+    return emails;
+    }
+}
+
+ function getEmployeeCloseToThisAddress(childDataArray, lat, long)
+{
+    var result = [];
+    for(var i = 0; i < childDataArray.length; i++)
+    {
+        var distance =  differenceBetweenTwoLongLat(lat, long, childDataArray[i]['Lat'], childDataArray[i]['Long'] );
+        if(distance != null)
+        {
+            if (distance < 10)
+            {
+                if(childDataArray[i]["Employer Emails"] !== undefined)
+                {
+                result = result.concat(getEmailsFromJson(JSON.stringify(childDataArray[i]["Employer Emails"]), distance, childDataArray[i]["Business"]['Bussiness Name'] + " : " + childDataArray[i]["Business"]['Street'] + ", " + childDataArray[i]["Business"]['County']  ));
+                }
+            }
+        }
+    //    console.log( differenceBetweenTwoLongLat(lat, long, childDataArray[i]['Lat'], childDataArray[i]['Long'] ));
+        
+    }
+    return result;
+}
+
+
+function getManagerDatabase( lat, long){
+ 
+    var leadsRef = firebase.database().ref('Manager');
+    var result = [];
+    leadsRef.on('value', function(snapshot) {
+      
+       
+        var childDataArray = [];
+        snapshot.forEach(function(childSnapshot) {
+          var childData = childSnapshot.val();
+          childDataArray.push(childData);
+         
+
+        //   console.log(json);
+        //   if (json.includes(email)) {
+        //      verified = true;
+        //      document.getElementById("verified").className = '';
+        //      document.getElementById("notVerified").className = 'hidden';
+        //      completeEmployeeCreation(email);
+          //}
+        });
+        // employee = employee.concat(getEmailsFromJson(JSON.stringify(childData["Employer Emails"])));
+        // childDataArray.splice(-1,1)
+        result = getEmployeeCloseToThisAddress(childDataArray, lat, long);
+        createResultMarkUp(result);
+
+        console.log(result);
+    }
+    );
+    
+}
+
 function makeid() {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -322,6 +419,20 @@ function makeid() {
   }
 
 
+
+  function closeAllCards()
+  {
+     $("#cardSearchBox").hide();
+     $("#cardLogin").hide();
+     $("#cardManagerSignUp").hide();
+     $("#cardAddBusiness").hide();
+     $("#cardEmployeeSignUp").hide();
+     $("#cardInitial").hide();
+     $("#cardEmployeePortal").hide();
+     $("#cardManagerPortal").hide();
+     $("#cardSearchResult").hide();
+
+  }
 
 
 function loadCurrentUserID(auth)
@@ -405,13 +516,8 @@ function createUser (email, password) {
 
 function LoadManagerPortal()
 {
-    $("#btnSignOut").hide();
-    $("#cardLogin").hide();
-    $("#cardManagerSignUp").hide();
-    $("#cardAddBusiness").hide();
-    $("#cardEmployeeSignUp").hide();
-    $("#cardInitial").hide();
-    $("#cardEmployeePortal").hide();
+    $("#btnSignOut").show();
+    closeAllCards();
 
     $("#cardManagerPortal").show();
 
@@ -452,16 +558,21 @@ function createEmployeeListMarkUp( emailArray )
 }
 
 
+function createResultMarkUp( results )
+{
+    $("#searchResults").html(" ");
+    $("#searchResults").append('<ul class="demo-list-icon mdl-list">');
+    for (var i =0; i< results.length; i+=3)
+    {
+    $("#searchResults").append(' <li class="mdl-list__item mdl-list__item--two-line "> <span class="mdl-list__item-primary-content"><i class="material-icons mdl-list__item-icon">person</i> ' +  results[i] +' </span> <span class="mdl-list__item-sub-title"> '+ results[i+1].toFixed(2)  +" miles,  " + results[i+2] +'</span> </li>');
+    }
+    $("#searchResults").append('</ul>');
+}
+
+
 function LoadEmployeePortal()
 {
-    $("#btnSignOut").hide();
-    $("#cardLogin").hide();
-    $("#cardAddBusiness").hide();
-
-    $("#cardManagerSignUp").hide();
-    $("#cardEmployeeSignUp").hide();
-    $("#cardInitial").hide();
-    $("#cardManagerPortal").hide();
+    closeAllCards()
   
     $("#cardEmployeePortal").show();
 }
@@ -513,15 +624,18 @@ function callAPItoGetLongLatFromAddress (street, state, zipcode, check){
         success: function(res) {
 
             var lat_a = res["resourceSets"][0]["resources"][0]["geocodePoints"][0]["coordinates"][0];
-            var long_b = res["resourceSets"][0]["resources"][0]["geocodePoints"][0]["coordinates"][1];
+            var long_a = res["resourceSets"][0]["resources"][0]["geocodePoints"][0]["coordinates"][1];
 
             console.log(lat_a);
-            console.log(long_b);
+            console.log(long_a);
             if (check) {
-             addManagerToDatabase(lat_a, long_b);
+             addManagerToDatabase(lat_a, long_a);
             } else {
                 lat = lat_a;
                 long = long_a;
+
+                getManagerDatabase(lat,long);
+                
             }
             // console.log(lat);
             // console.log(long);
