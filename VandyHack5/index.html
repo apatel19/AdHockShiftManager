@@ -33,14 +33,7 @@
               <span class="page-title-span"> | </span>
               <span class="page-title-span"> Employee Portal </span>
             </span>
-            <span class="mdl-layout__title" >
-                <span><button   class="mdl-button mdl-js-button page-title-span mdl-button--raised mdl-js-ripple-effect mdl-button--accent buttonCard" id = "btnListBusiness">
-                    Business
-                  </button> </span>
-                <span>  <button   class="mdl-button mdl-js-button page-title-span mdl-button--raised mdl-js-ripple-effect mdl-button--accent buttonCard" id = "btnListEmployee">
-                      Employee(s)
-                    </button> </span>
-              </span>
+           
             <div class="mdl-layout-spacer"></div>
             <nav class="mdl-navigation">
               <button id="btnSignOut" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
@@ -77,22 +70,15 @@
             
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent fieldInput" id = "btnSubmitLogin">
                 enter
-              </button>
-            
+              </button>      
     </div>
       
-
+    
 
     <div class="demo-card-wide mdl-card mdl-shadow--2dp"  style="display:none ; width: 95%" id = "cardEmployeePortal">
         <div class="mdl-card__title">
           <h2 class="mdl-card__title-text" > Employee Portal</h2>
-        </div>
-      
-        
-       
-
-
-        
+        </div>     
 </div>
 
 
@@ -100,6 +86,15 @@
     <div class="mdl-card__title">
       <h2 class="mdl-card__title-text" > Manager Portal</h2>
     </div>
+    <span class="mdl-layout__title container" >
+        <span><button   class="mdl-button mdl-js-button page-title-span mdl-button--raised mdl-js-ripple-effect mdl-button--accent " id = "btnLoadSearchCard">
+              Search for Employee(s)
+          </button> </span>
+        <span>  <button   class="mdl-button mdl-js-button page-title-span mdl-button--raised mdl-js-ripple-effect mdl-button--accent " id = "btnLoadMyEmployee">
+            View / Add Your Employee(s)
+            </button> </span>
+      </span>
+    <div id = "divEmployeeDetails" style="display:none"> 
     <div id="yourEmployees"></div>
 
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent fieldInput" id = "btnAddMyEmployee">
@@ -116,11 +111,62 @@
         enter
       </button>
     </div>
+  </div>
+
+
+  
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp"  style="display:none ; width: 95%" id ="cardSearchBox">
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text" > Search Box</h2>
+        </div>     
+      <div class="center-on-page">
+        
+          <h4>Select Business Options</h4>
+          <div class="select">
+            <select name="slct" id="slct">
+              <option>Choose an option</option>
+              <option value="1">Subway</option>
+              <option value="2">McDonald's </option>
+              <option value="3">Jimmy John's</option>
+            </select>
+          </div>
+          </div>
+
+          <label  class = "fieldlabel">Business Street Address </label>
+          <div class="mdl-textfield mdl-js-textfield">  
+                  <input class="mdl-textfield__input fieldInput" type="text" id="search_street_address">
+            <label class="mdl-textfield__label fieldInput" for="search_street_address">Ex: 6122, Lake Vista Dr</label>
+          </div>
+          
+          <label  class = "fieldlabel">County</label>
+          <div class="mdl-textfield mdl-js-textfield">  
+                  <input class="mdl-textfield__input fieldInput" type="text" id="search_county">
+            <label class="mdl-textfield__label fieldInput" for="search_county">Ex: Tuscaloosa</label>
+          </div>
+  
+          <label  class = "fieldlabel">State</label>
+          <div class="mdl-textfield mdl-js-textfield">  
+                  <input class="mdl-textfield__input fieldInput" type="text" id="search_state">
+            <label class="mdl-textfield__label fieldInput" for="search_state">Ex: AL</label>
+          </div>
+          <label  class = "fieldlabel">Zipcode</label>
+          <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input fieldInput" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="search_zip_code" required>
+                  <label class="mdl-textfield__label fieldInput" for="search_zip_code">Ex: 35406</label>
+                  <span class="mdl-textfield__error fieldInput">Input is not a number!</span>
+          </div>  
+
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent fieldInput" id = "btnSearch">
+              Search!
+            </button>
+
+</div>
     
 </div>
 
 
-
+    
+  </div>
       <!-- Primary-colored flat button -->
     
       <div class="demo-card-wide mdl-card mdl-shadow--2dp" id = "cardInitial">

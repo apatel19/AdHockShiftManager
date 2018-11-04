@@ -17,6 +17,21 @@ $(document).ready(function(){
        
     });
 
+    
+
+
+    $("#btnLoadSearchCard").click('input', function(){
+        $("#divEmployeeDetails").hide();
+        $("#cardSearchBox").show();
+    });
+
+    $("#btnLoadMyEmployee").click('input', function(){
+        $("#divEmployeeDetails").show();
+        $("#cardSearchBox").hide();
+    });
+
+
+
 
     $("#btnManager").click('input', function(){
         $("#cardInitial").hide();
@@ -57,7 +72,7 @@ $(document).ready(function(){
         $("#cardAddBusiness").hide();
         $("#cardEmployeeSignUp").hide();
         $("#cardInitial").hide();
-
+        verifyEmailWhichExistsInManagerDatabase();
 
      });
 
@@ -248,7 +263,7 @@ function createEmployeeListMarkUp( emailArray )
     $("#yourEmployees").append('<ul class="demo-list-icon mdl-list">');
     for (var i =0; i< emailArray.length; i++)
     {
-    $("#yourEmployees").append(' <li class="mdl-list__item"> <span class="mdl-list__item-primary-content"><i class="material-icons mdl-list__item-icon">person</i> ' +  emailArray[i] +' </span> </li>"');
+    $("#yourEmployees").append(' <li class="mdl-list__item"> <span class="mdl-list__item-primary-content"><i class="material-icons mdl-list__item-icon">person</i> ' +  emailArray[i] +' </span> </li>');
     }
     $("#yourEmployees").append('</ul>');
 }
