@@ -78,6 +78,7 @@ $(document).ready(function(){
      $("#btnSignOut").click('input', function(){
         $("#btnLogin").show();
         $("#btnSignOut").hide();
+        document.getElementById('PortalLabel').innerHTML = "Welcome to Ad-Hoc...";
         firebase.auth().signOut().then(function() {
             console.log('Signed Out');
             closeAllCards();
