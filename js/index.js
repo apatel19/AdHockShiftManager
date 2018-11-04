@@ -11,8 +11,6 @@ $(document).ready(function(){
         document.getElementById("verified").className = 'hidden';
         document.getElementById("notVerified").className = 'hidden';
         verifyEmailWhichExistsInManagerDatabase(email_address);
-    
-        
         setTimeout(2500);
 
     });
@@ -447,11 +445,20 @@ function loadCurrentUserID(auth)
         {
             isManager = 0;
             LoadEmployeePortal();
+
+            document.getElementById('PortalLabel').innerHTML = "Employee Portal";
+            var ret = email.replace('@gmailcom','');
+            document.getElementById('employeePortal').innerHTML = "Welcome" + ', ' + ret;
+
         }
         else
         {
             isManager = 1;
             LoadManagerPortal();
+
+            document.getElementById('PortalLabel').innerHTML = "Manager Portal";
+            var ret = email.replace('@gmailcom','');
+            document.getElementById('welcome').innerHTML = "Welcome" + ', ' + ret;
         }
 
     });
