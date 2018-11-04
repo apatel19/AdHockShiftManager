@@ -15,8 +15,9 @@ td, th {
   padding: 8px;
 }
 
-#cardSearchBox1, #cardSearchBox{
+#cardSearchResult, #cardSearchBox{
   float: left;
+  
 }
 
 

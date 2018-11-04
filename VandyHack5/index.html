@@ -158,10 +158,11 @@
         Add Your Employees
       </button>
       <div id="addEmployee"  style="display:none">
-     <label class = "fieldlabel" >email </label> 
+     
         <div class="mdl-textfield mdl-js-textfield"> 
+            <label class = "fieldlabel" >Add Your Employee's Email: </label> 
           <input class="mdl-textfield__input fieldInput" type="text" id="my_employee_email" required>
-          <label class="mdl-textfield__label fieldInput" for="my_employee_email">type here...</label>
+          <label class="mdl-textfield__label fieldInput" for="my_employee_email"></label>
           <span class="mdl-textfield__error fieldInput" style="color:lightgreen">This email is needed by the employee to sign up!</span>
         </div>
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent fieldInput" id = "btnAddMyEmployeeEmail">
@@ -171,13 +172,14 @@
   </div>
 
 
-  
+  <span> 
     <div class="demo-card-wide mdl-card mdl-shadow--2dp"  style="display:none ; width: 43%" id ="cardSearchBox">
         <div class="mdl-card__title">
         </div>     
       <div class="center-on-page">
         
-          <h4>Select Business Options</h4>
+          <label  class = "fieldlabel">Choose Business Type </label>
+          <br>
           <div class="select">
             <select name="slct" id="slct">
               <option>Choose an option</option>
@@ -220,13 +222,15 @@
 
 <div class="demo-card-wide mdl-card mdl-shadow--2dp"  style=" width: 43%" id ="cardSearchResult">
   <div class="mdl-card__title">
-    <h2 class="mdl-card__title-text" > Results:</h2>
+    <h4 class="mdl-card__title-text" > Results:</h4>
   </div>     
 
   <div id = "divSearchResults"> 
     <div id="searchResults"></div>
   </div>
 </div>  
+
+</span> 
 </div>
       <!-- Primary-colored flat button -->
     

@@ -33,6 +33,7 @@ $(document).ready(function(){
     $("#btnLoadMyEmployee").click('input', function(){
         $("#divEmployeeDetails").show();
         $("#cardSearchBox").hide();
+        $("#cardSearchResult").hide();
     });
 
 
