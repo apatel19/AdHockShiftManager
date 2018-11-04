@@ -31,7 +31,9 @@
           <div class="mdl-layout__header-row">
             <span class="mdl-layout__title">Day_work
               <span class="page-title-span"> | </span>
-              <span class="page-title-span"> Employee Portal </span>
+              <span class="page-title-span"> Employee Portal
+              </span>
+              
             </span>
             <span class="mdl-layout__title" >
                 <span><button   class="mdl-button mdl-js-button page-title-span mdl-button--raised mdl-js-ripple-effect mdl-button--accent buttonCard" id = "btnListBusiness">
@@ -40,7 +42,8 @@
                 <span>  <button   class="mdl-button mdl-js-button page-title-span mdl-button--raised mdl-js-ripple-effect mdl-button--accent buttonCard" id = "btnListEmployee">
                       Employee(s)
                     </button> </span>
-              </span>
+                  </span>
+
             <div class="mdl-layout-spacer"></div>
             <nav class="mdl-navigation">
               <button id="btnSignOut" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
@@ -85,15 +88,65 @@
 
     <div class="demo-card-wide mdl-card mdl-shadow--2dp"  style="display:none ; width: 95%" id = "cardEmployeePortal">
         <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text" > Employee Portal</h2>
-        </div>
+          <h2 class="mdl-card__title-text" > Employee Portal </h2>
+    </div>
       
-        
-       
-
-
-        
+      
+    <table style="width:50%">
+        <tr>
+          <th>Day</th>
+          <th>Morning</th>
+          <th>Evening</th> 
+          <th>Night</th>
+        </tr>
+        <tr>
+          <td>Monday</td>
+          <td><input id="Monday_Morning" type="checkbox"  name="" value=1></td> 
+          <td><input id="Monday_Evening" type="checkbox" name="" value=1></td>
+          <td><input id="Monday_Night" type="checkbox" name="" value=1></td>  
+        </tr>
+        <tr>
+          <td>Tuesday</td>
+          <td><input id="Tuesday_Morning" type="checkbox"  name="" value=1></td> 
+          <td><input id="Tuesday_Evening" type="checkbox" name="" value=1></td>
+          <td><input id="Tuesday_Night" type="checkbox" name="" value=1></td>  
+        </tr>
+        <tr>
+            <td>Wednesday</td>
+            <td><input id="Wednesday_Morning" type="checkbox"  name="" value=1></td> 
+          <td><input id="Wednesday_Evening" type="checkbox" name="" value=1></td>
+          <td><input id="Wednesday_Night" type="checkbox" name="" value=1></td>  
+          </tr>
+        <tr>
+            <td>Thursday</td>
+            <td><input id="Thursday_Morning" type="checkbox"  name="" value=1></td> 
+          <td><input id="Thursday_Evening" type="checkbox" name="" value=1></td>
+          <td><input id="Thursday_Night" type="checkbox" name="" value=1></td>  
+         </tr>
+         <tr>
+             <td>Friday</td>
+             <td><input id="Friday_Morning" type="checkbox"  name="" value=1></td> 
+          <td><input id="Friday_Evening" type="checkbox" name="" value=1></td>
+          <td><input id="Friday_Night" type="checkbox" name="" value=1></td>  
+         </tr>
+          <tr>
+            <td>Saturday</td>
+            <td><input id="Saturday_Morning" type="checkbox"  name="" value=1></td> 
+            <td><input id="Saturday_Evening" type="checkbox" name="" value=1></td>
+            <td><input id="Saturday_Night" type="checkbox" name="" value=1></td>  
+           </tr>
+           <tr>
+              <td>Sunday</td>
+              <td><input id="Sunday_Morning" type="checkbox"  name="" value=1></td> 
+             <td><input id="Sunday_Evening" type="checkbox" name="" value=1></td>
+          <td><input id="Sunday_Night" type="checkbox" name="" value=1></td>  
+            </tr>
+      </table>
+      <button id = "btnTable">
+          Submit
+        </button>  
 </div>
+
 
 
 <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="display:none; width: 95%" id = "cardManagerPortal">
@@ -188,6 +241,8 @@
         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent fieldInput" id = "btnSaveEmployeeDetails">
                 Save
               </button>
+              <label id="verified" class="hidden_verified_employeeLabel"> Verified </label>
+              <label id="notVerified" class="hidden_verified_employeeLabel"> Not Verified </label>
             </form>
             </div>
                     <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="display:none" id = "cardManagerSignUp">

@@ -1,20 +1,20 @@
 var lat, long;
 var currentUserId;
+var verified = false;
 var isManager = -1; // 0 means is employee; 1 means is manager, -1 means is not defined.
 var auth = firebase.auth();
 $(document).ready(function(){
     $("#btnSaveEmployeeDetails").click('input', function(){
         
         var email_address = $('#employee_email_address').val();
-        console.log(email_address);
         
+        document.getElementById("verified").className = 'hidden';
+        document.getElementById("notVerified").className = 'hidden';
         verifyEmailWhichExistsInManagerDatabase(email_address);
+    
         
-        var employee_password = $('#employee_password').val();
-        createUser(email_address, employee_password);
-        setTimeout(addEmployeeToDatabase, 2500);
-        LoadEmployeePortal();
-       
+        setTimeout(2500);
+
     });
 
 
@@ -36,10 +36,15 @@ $(document).ready(function(){
        
         var manager_email = $('#manager_email_address').val(); 
         var manager_pass = $("#manager_password").val(); 
+       
+        
+       
         createUser(manager_email, manager_pass);
-        callAPItoGetLongLatFromAddress();
+       
+        callAPItoGetLongLatFromAddress($("#street_address").val(), $("#state").val(), $("#zip_code").val());
         //setTimeout(addRepo,4000);
-        setTimeout(addManagerToDatabase,2500);
+        
+        //setTimeout(addManagerToDatabase(lat_and_long[0], lat_and_long[1]),2500);
         LoadManagerPortal();
        
     });
@@ -58,6 +63,7 @@ $(document).ready(function(){
         $("#cardEmployeeSignUp").hide();
         $("#cardInitial").hide();
 
+         //verifyEmailWhichExistsInManagerDatabase("vidhipatel@gmail.com");
 
      });
 
@@ -84,33 +90,210 @@ $(document).ready(function(){
      
     
      });
+
+     var monday = [];
+     var tuesday = [];
+     var wednesday = [];
+     var thursday = [];
+     var friday = [];
+     var saturday = [];
+     var sunday = [];
+     var schedule = [];
+     $("#btnTable").click('input', function(){
+
+        console.log("Working");
+
+        if (document.getElementById("Monday_Morning").checked){
+            monday[0] = 1;
+        } else {
+            monday[0] = 0;
+        }
+
+        if (document.getElementById("Monday_Evening").checked){
+            monday[1] = 1;
+        } else {
+            monday[1] = 0;
+        }
+
+        if (document.getElementById("Monday_Night").checked){
+            monday[2] = 1;
+        } else {
+            monday[2] = 0;
+        }
+
+        var s = monday[0].toString() + monday[1].toString() + monday[2].toString();
+        schedule.push(s);
+
+        if (document.getElementById("Tuesday_Morning").checked){
+            tuesday[0] = 1;
+        } else {
+            tuesday[0] = 0; 
+        }
+
+        if (document.getElementById("Tuesday_Evening").checked){
+            tuesday[1] = 1;
+        } else {
+            tuesday[1] = 0;
+        }
+        
+        if (document.getElementById("Tuesday_Night").checked){
+            tuesday[2] = 1;
+        } else {
+            tuesday[2] = 0;
+        }
+
+        s = tuesday[0].toString() + tuesday[1].toString() + tuesday[2].toString();
+        schedule.push(s);
+
+        if (document.getElementById("Wednesday_Morning").checked){
+            wednesday[0] = 1;
+        } else {
+            wednesday[0] = 0; 
+        }
+
+        if (document.getElementById("Wednesday_Evening").checked){
+            wednesday[1] = 1;
+        } else {
+            wednesday[1] = 0;
+        }
+        
+        if (document.getElementById("Wednesday_Night").checked){
+            wednesday[2] = 1;
+        } else {
+            wednesday[2] = 0;
+        }
+
+        s = wednesday[0].toString() + wednesday[1].toString() + wednesday[2].toString();
+        schedule.push(s);
+        
+        if (document.getElementById("Thursday_Morning").checked){
+            thursday[0] = 1;
+        } else {
+            thursday[0] = 0; 
+        }
+
+        if (document.getElementById("Thursday_Evening").checked){
+            thursday[1] = 1;
+        } else {
+            thursday[1] = 0;
+        }
+        
+        if (document.getElementById("Thursday_Night").checked){
+            thursday[2] = 1;
+        } else {
+            thursday[2] = 0;
+        }
+
+        s = thursday[0].toString() + thursday[1].toString() + thursday[2].toString();
+        schedule.push(s);
+
+        if (document.getElementById("Friday_Morning").checked){
+            friday[0] = 1;
+        } else {
+            friday[0] = 0; 
+        }
+
+        if (document.getElementById("Friday_Evening").checked){
+            friday[1] = 1;
+        } else {
+            friday[1] = 0;
+        }
+        
+        if (document.getElementById("Friday_Night").checked){
+            friday[2] = 1;
+        } else {
+            friday[2] = 0;
+        }
+
+        s = friday[0].toString() + friday[1].toString() + friday[2].toString();
+        schedule.push(s);
+        
+        if (document.getElementById("Saturday_Morning").checked){
+            saturday[0] = 1;
+        } else {
+            saturday[0] = 0; 
+        }
+
+        if (document.getElementById("Saturday_Evening").checked){
+            saturday[1] = 1;
+        } else {
+            saturday[1] = 0;
+        }
+        
+        if (document.getElementById("Saturday_Night").checked){
+            saturday[2] = 1;
+        } else {
+            saturday[2] = 0;
+        }
+
+        s = saturday[0].toString() + saturday[1].toString() + saturday[2].toString();
+        schedule.push(s);
+
+        if (document.getElementById("Sunday_Morning").checked){
+            sunday[0] = 1;
+        } else {
+            sunday[0] = 0; 
+        }
+
+        if (document.getElementById("Sunday_Evening").checked){
+            sunday[1] = 1;
+        } else {
+            sunday[1] = 0;
+        }
+        
+        if (document.getElementById("Sunday_Night").checked){
+            sunday[2] = 1;
+        } else {
+            sunday[2] = 0;
+        }
+
+        s = sunday[0].toString() + sunday[1].toString() + sunday[2].toString();
+        schedule.push(s);
+
+        console.log(schedule);
+
+        var uid = auth.currentUser.uid;
+        console.log(uid);
+        var firebaseRef = firebase.database().ref().child('Employee').child(uid);
+
+        firebaseRef.child("Shchedule").set(schedule);
+        schedule = [];
+     });
+
 });
 
+function completeEmployeeCreation(email)
+{
+    var employee_password = $('#employee_password').val();
+    setTimeout(createUser(email, employee_password), 2000);
+    setTimeout(addEmployeeToDatabase, 2500);
+    LoadEmployeePortal();
+}
+
+
+
 function verifyEmailWhichExistsInManagerDatabase(email){
-    var myDict = []; 
-    var i = 0;
+
+    document.getElementById("verified").className = 'hidden';
+    document.getElementById("notVerified").className = '';
+    
     var leadsRef = firebase.database().ref('Manager');
     
     leadsRef.on('value', function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
           var childData = childSnapshot.val();
-          myDict.push([i, childData["Employer Emails"]]);
-          //   console.log(childData["Employer Emails"].forEach);
-            i++;
-        });
-    });
-    
-    // setTimeout(3000,console.log(myDict[0]));
-//     var leadsRef = firebase.database().ref('/Manager/'+ auth.currentUser.uid +'/Employer Emails' );
-//     leadsRef.on('value', function(snapshot) {
-//         snapshot.forEach(function(childSnapshot) {
-//           var childData = childSnapshot.val();
-//           console.log(childData);
-          
-//         });
-
-//     }
-// }
+          var json = JSON.stringify(childData["Employer Emails"]);
+          console.log(json);
+          if (json.includes(email)) {
+             verified = true;
+             document.getElementById("verified").className = '';
+             document.getElementById("notVerified").className = 'hidden';
+             completeEmployeeCreation(email);
+          }
+        }
+        );
+    }
+    );
 }
 
 function makeid() {
@@ -147,7 +330,7 @@ function loadCurrentUserID(auth)
     });
 
 }
-function addManagerToDatabase (){
+function addManagerToDatabase (lat_a, long_a){
     var uid = auth.currentUser.uid;
      currentUserId = uid;
      isManager = 1;
@@ -175,8 +358,8 @@ function addManagerToDatabase (){
     firebaseRef.child("Business").child("State").set(bussiness_state);
     firebaseRef.child("Business").child("Zip").set(bussiness_zip);
     console.log(lat);
-    firebaseRef.child("Business").child("Lat").set(lat);
-    firebaseRef.child("Business").child("Long").set(long); 
+    firebaseRef.child("Business").child("Lat").set(lat_a);
+    firebaseRef.child("Business").child("Long").set(long_a); 
     firebaseRef.child("Business").child("ID").set(uid);
     manager_email = manager_email.replace('.',""); 
 
@@ -269,29 +452,72 @@ function LoadEmployeePortal()
 }
 
 
-function callAPItoGetLongLatFromAddress() {
-    var street = $("#street_address").val();
+// function callAPItoGetLongLatFromAddress() {
+//     var street = $("#street_address").val();
+//     street = street.split(' ').join('');
+//     $.ajax({
+//         url: "http://dev.virtualearth.net/REST/v1/Locations?CountryRegion=US&adminDistrict=" + $("#state").val() + "&locality=Somewhere&postalCode=" + $("#zip_code").val() + "&addressLine=" + street + "&key=At1MPmDJGjOFF6WZ8rwDyhTn-ZHwl7MAQaeMuIunNCcdk6bYznOGuILjZ2ts5YVp",
+//         jsonp: true,
+//         method: "GET",
+//         dataType: "json",
+//         success: function(res) {
+
+//             lat = res["resourceSets"][0]["resources"][0]["geocodePoints"][0]["coordinates"][0];
+//             long = res["resourceSets"][0]["resources"][0]["geocodePoints"][0]["coordinates"][1];
+
+//             console.log(lat);
+//             console.log(long);
+
+//         },
+
+//         error : function(res) {
+//             console.log(res);
+//         }
+//     });
+// }
+
+function buildAPI (street, state, zipcode) {
     street = street.split(' ').join('');
+    return "http://dev.virtualearth.net/REST/v1/Locations?CountryRegion=US&adminDistrict=" + state + "&locality=Somewhere&postalCode=" + zipcode + "&addressLine=" + street + "&key=At1MPmDJGjOFF6WZ8rwDyhTn-ZHwl7MAQaeMuIunNCcdk6bYznOGuILjZ2ts5YVp"
+}
+
+function differenceBetweenTwoLongLat (lat1, long1, lat2, long2){
+        let p = 0.017453292519943295;    // (pi / 180)
+        let a = 0.5 - Math.cos((lat2 - lat1) * p)/2 +
+            Math.cos(lat1 * p) * Math.cos(lat2 * p) *
+            (1 - Math.cos((long2 - long1) * p))/2;
+        return ((12742 * Math.asin(Math.sqrt(a)) * (0.621371))) // returning answer in mile
+}
+
+function callAPItoGetLongLatFromAddress (street, state, zipcode, check){
     $.ajax({
-        url: "http://dev.virtualearth.net/REST/v1/Locations?CountryRegion=US&adminDistrict=" + $("#state").val() + "&locality=Somewhere&postalCode=" + $("#zip_code").val() + "&addressLine=" + street + "&key=At1MPmDJGjOFF6WZ8rwDyhTn-ZHwl7MAQaeMuIunNCcdk6bYznOGuILjZ2ts5YVp",
+        url: buildAPI(street,state,zipcode),
         jsonp: true,
         method: "GET",
         dataType: "json",
         success: function(res) {
 
-            lat = res["resourceSets"][0]["resources"][0]["geocodePoints"][0]["coordinates"][0];
-            long = res["resourceSets"][0]["resources"][0]["geocodePoints"][0]["coordinates"][1];
+            var lat_a = res["resourceSets"][0]["resources"][0]["geocodePoints"][0]["coordinates"][0];
+            var long_b = res["resourceSets"][0]["resources"][0]["geocodePoints"][0]["coordinates"][1];
 
-            console.log(lat);
-            console.log(long);
-
+            console.log(lat_a);
+            console.log(long_b);
+            if (check) {
+             addManagerToDatabase(lat_a, long_b);
+            } else {
+                lat = lat_a;
+                long = long_a;
+            }
+            // console.log(lat);
+            // console.log(long);
         },
-
         error : function(res) {
             console.log(res);
         }
     });
 }
+
+
 
 //http://dev.virtualearth.net/REST/v1/Locations?CountryRegion=US&adminDistrict=AL&locality=Somewhere&postalCode=35401&addressLine=900%Hargrove%Road&key=At1MPmDJGjOFF6WZ8rwDyhTn-ZHwl7MAQaeMuIunNCcdk6bYznOGuILjZ2ts5YVp
 
