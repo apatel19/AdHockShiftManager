@@ -4,9 +4,10 @@ var isManager = -1; // 0 means is employee; 1 means is manager, -1 means is not 
 
 $(document).ready(function(){
     $("#btnSaveEmployeeDetails").click('input', function(){
-
+        
         var email_address = $('#employee_email_address').val();
         console.log(email_address);
+        verifyEmailWhichExistsInManagerDatabase(email_address);
         var employee_password = $('#employee_password').val();
         createUser(email_address, employee_password);
         setTimeout(addEmployeeToDatabase, 2500);
@@ -72,14 +73,14 @@ $(document).ready(function(){
 
 
      $("#btnSubmitLogin").click('input', function(){
-
+     
      var auth = firebase.auth();
      auth.signInWithEmailAndPassword($('#login_email_address').val(), $('#login_password').val());
      setTimeout(nothing,2500);
      currentUserId = auth.currentUserId;
      var email = $('#login_email_address').val();
      email = email.replace(".","");
- 
+        
      return firebase.database().ref('/position/' + email).once('value').then(function(snapshot) {
          if (snapshot["node_"]["value_"] == "Employee")
          {
@@ -97,6 +98,18 @@ $(document).ready(function(){
      });
 });
 
+function verifyEmailWhichExistsInManagerDatabase(email){
+
+    // var leadsRef = firebase.database().ref('Manager');
+    // leadsRef.on('value', function(snapshot) {
+    //     snapshot.forEach(function(childSnapshot) {
+    //       var childData = childSnapshot.val();
+    //       console.log(childData["Bussiness Name"]);
+    //     });
+    // });
+   
+
+}
 
 function makeid() {
     var text = "";
