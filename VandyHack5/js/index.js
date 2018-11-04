@@ -1,7 +1,7 @@
 var lat, long;
 var currentUserId;
 var isManager = -1; // 0 means is employee; 1 means is manager, -1 means is not defined.
-
+var auth = firebase.auth();
 $(document).ready(function(){
     $("#btnSaveEmployeeDetails").click('input', function(){
 
@@ -54,6 +54,8 @@ $(document).ready(function(){
         $("#cardAddBusiness").hide();
         $("#cardEmployeeSignUp").hide();
         $("#cardInitial").hide();
+
+
      });
 
      $("#btnAddMyEmployee").click('input', function(){
@@ -64,7 +66,7 @@ $(document).ready(function(){
      $("#btnAddMyEmployeeEmail").click('input', function(){
         $("#addEmployee").hide();
         var autoid = makeid();
-        var firebaseRef = firebase.database().ref().child('Manager').child(currentUserId).child("Employer Emails");
+        var firebaseRef = firebase.database().ref().child('Manager').child(auth.currentUser.uid).child("Employer Emails");
         console.log($('#my_employee_email').val())
         firebaseRef.child(autoid).set($('#my_employee_email').val());
 
@@ -73,27 +75,11 @@ $(document).ready(function(){
 
      $("#btnSubmitLogin").click('input', function(){
 
-     var auth = firebase.auth();
+     
      auth.signInWithEmailAndPassword($('#login_email_address').val(), $('#login_password').val());
-     setTimeout(nothing,2500);
-     currentUserId = auth.currentUserId;
-     var email = $('#login_email_address').val();
-     email = email.replace(".","");
- 
-     return firebase.database().ref('/position/' + email).once('value').then(function(snapshot) {
-         if (snapshot["node_"]["value_"] == "Employee")
-         {
-             isManager = 0;
-             LoadEmployeePortal();
-         }
-         else
-         {
-             isManager = 1;
-             LoadManagerPortal();
-         }
-
-     });
-
+     setTimeout(loadCurrentUserID(auth),2500);
+     
+    
      });
 });
 
@@ -109,11 +95,28 @@ function makeid() {
   }
 
 
-var auth = firebase.auth();
 
-function nothing()
+
+function loadCurrentUserID(auth)
 {
-    console.log("nothing wait");
+    currentUserId = auth.currentUserId;
+    var email = $('#login_email_address').val();
+    email = email.replace(".","");
+
+    return firebase.database().ref('/position/' + email).once('value').then(function(snapshot) {
+        if (snapshot["node_"]["value_"] == "Employee")
+        {
+            isManager = 0;
+            LoadEmployeePortal();
+        }
+        else
+        {
+            isManager = 1;
+            LoadManagerPortal();
+        }
+
+    });
+
 }
 function addManagerToDatabase (){
     var uid = auth.currentUser.uid;
@@ -184,6 +187,46 @@ function LoadManagerPortal()
     $("#cardEmployeePortal").hide();
 
     $("#cardManagerPortal").show();
+
+
+    // return firebase.database().ref('/manager/' + auth.currentUser.uid + '/Employ').once('value').then(function(snapshot) {
+    //     snapshot.forEach(function(childSnapshot) {
+    //                var childData = childSnapshot.val();
+    //                for(i =0; i < childData.length; i++)
+    //                {
+
+                
+
+
+var leadsRef = firebase.database().ref('/Manager/'+ auth.currentUser.uid +'/Employer Emails' );
+    leadsRef.on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var childData = childSnapshot.val();
+          console.log(childData);
+        });
+
+
+
+
+    //    for (var i = 0; i <  snapshot.length; i++)
+    //    {
+    //     snapshot
+    //    } 
+    console.log(snapshot);
+});
+    
+
+}
+
+function createTimelineMarkUp( )
+{
+    document.getElementById("timeline").innerHTML = "";
+    for ( i = timelineIndex ; i< timelineIndex + timelinelength; i++)
+    {
+    $("#timeline").append(" <div class='col' id='timelinediv" + i +"' style='text-align:center; font-size:15;'>" + commitIds[i].substring(0, 5) 
+    +
+      "<div class='col' id='timelinedate" + i +"' style='text-align:center; font-size:10;'>" + commitDates[i] +" </div></div>");
+    }
 }
 
 function LoadEmployeePortal()
